@@ -1,0 +1,43 @@
+name: Atualizar CSV do Google Drive
+
+on:
+  schedule:
+    - cron: "0 * * * *"     # Executa a cada 1 hora
+  workflow_dispatch:        # Permite executar manualmente
+
+jobs:
+  atualizar-csv:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Baixar arquivo CSV do Google Drive
+      run: |
+        echo "Baixando arquivo do Google Drive..."
+        curl -L --fail "https://drive.google.com/uc?export=download&id=17tW1PwgxUpR94Dtg4MHe0K7QqOv7VFHQ" -o FOR.BIZA.SGI.csv
+
+    - name: Mostrar conteúdo baixado (debug)
+      run: |
+        echo "Cabeçalho do CSV:"
+        head -n 10 FOR.BIZA.SGI.csv
+        echo "Tamanho do arquivo:"
+        ls -lh FOR.BIZA.SGI.csv
+
+    - name: Configurar Git
+      run: |
+        git config user.name "github-actions"
+        git config user.email "actions@github.com"
+        git config core.autocrlf false
+
+    - name: Commitar se houver alterações
+      run: |
+        git add FOR.BIZA.SGI.csv
+        if git diff --cached --quiet; then
+          echo "Nenhuma alteração no CSV. Nada a atualizar."
+        else
+          echo "Alterações detectadas! Commitando..."
+          git commit -m "Atualização automática do CSV via Google Drive"
+          git push
+        fi
