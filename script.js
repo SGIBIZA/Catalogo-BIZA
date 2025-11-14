@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const csvUrl = 'https://raw.githubusercontent.com/Dodoccb/Catalogo-BIZA/main/FOR.BIZA.SGI.csv';
+  const csvUrl = 'https://raw.githubusercontent.com/SGIBIZA/Catalogo-BIZA/main/FOR.BIZA.SGI.csv';
   let dadosOriginais = [];
 
  function excelDateToJSDate(serial) {
