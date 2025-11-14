@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catálogo de Ideias BIZA</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+</head>
+<body>
+  <header>
+    <img src="https://raw.githubusercontent.com/Dodoccb/Catalogo-BIZA/main/logo-BIZAxGHT.png" alt="Logo BIZA e GHT" />
+    <h1>Catálogo de Ideias BIZA</h1>
+
+    <!-- Botão em caixa branca -->
+    <div class="botao-container">
+      <div class="botao-box">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdVczEc2ipfK5so9cr0dHmljeqZ0ivjNXAx_MyS9YASxOzXZg/viewform"
+           target="_blank"
+           class="botao-ideia">
+          💡 Dê sua Ideia
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="filtros">
+    <select id="statusFilter">
+      <option value="">— Todos Status —</option>
+      <option value="Concluído">Concluído</option>
+      <option value="Em Aberto">Em Aberto</option>
+    </select>
+
+    <input type="text" id="pesquisa" placeholder="Pesquisar ideias..." />
+
+    <div class="total-box">
+      <span>Total de Melhorias:</span>
+      <span id="totalMelhorias">0</span>
+    </div>
+  </div>
+
+  <div id="cards"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
