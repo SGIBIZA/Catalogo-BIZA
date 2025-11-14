@@ -24,22 +24,25 @@
     </div>
   </header>
 
-  <div class="filtros">
-    <select id="statusFilter">
-      <option value="">— Todos Status —</option>
-      <option value="Concluído">Concluído</option>
-      <option value="Em Aberto">Em Aberto</option>
-    </select>
+  <!-- NOVO: Wrapper para centralizar o conteúdo e limitar a largura -->
+  <div class="wrapper">
+    <div class="filtros">
+      <select id="statusFilter">
+        <option value="">— Todos Status —</option>
+        <option value="Concluído">Concluído</option>
+        <option value="Em Aberto">Em Aberto</option>
+      </select>
 
-    <input type="text" id="pesquisa" placeholder="Pesquisar ideias..." />
+      <input type="text" id="pesquisa" placeholder="Pesquisar ideias..." />
 
-    <div class="total-box">
-      <span>Total de Melhorias:</span>
-      <span id="totalMelhorias">0</span>
+      <div class="total-box">
+        <span>Total de Melhorias:</span>
+        <span id="totalMelhorias">0</span>
+      </div>
     </div>
-  </div>
 
-  <div id="cards"></div>
+    <div id="cards"></div>
+  </div>
 
   <script src="script.js"></script>
 </body>
