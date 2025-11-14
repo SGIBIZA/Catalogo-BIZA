@@ -2,33 +2,41 @@ name: Atualizar CSV do Google Drive
 
 on:
   schedule:
-    - cron: '0 */1 * * *'  # Executa a cada 1 hora
-  workflow_dispatch:       # Permite execução manual
+    - cron: '0 */1 * * *'
+  workflow_dispatch:
 
 jobs:
   atualizar-csv:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
 
-      - name: Baixar CSV do Google Drive
-        run: |
-          curl -L "https://drive.google.com/uc?export=download&id=17tW1PwgxUpR94Dtg4MHe0K7QqOv7VFHQ" -o FOR.BIZA.SGI.csv
+    - name: Baixar CSV do Google Drive
+      run: |
+        curl -L --fail "https://drive.google.com/uc?export=download&id=17WtIPwgxUpR94Dtg4WHe0K7Q0v7VfHQ" -o FOR.BIZA.SGI.csv
 
-      - name: Configurar Git
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
+    - name: Verificar conteúdo baixado
+      run: |
+        echo "Head:"
+        head -n 20 FOR.BIZA.SGI.csv
+        echo "Tamanho:"
+        ls -lh FOR.BIZA.SGI.csv
 
-      - name: Verificar alterações e commitar
-        run: |
-          git add FOR.BIZA.SGI.csv
-          if git diff --cached --quiet; then
-            echo "✅ Nenhuma alteração detectada no CSV. Nenhum commit necessário."
-          else
-            echo "🔄 Alterações detectadas no CSV. Comitando atualização..."
-            git commit -m "Atualização automática do CSV via Google Drive"
-            git push
-          fi
+    - name: Configurar Git
+      run: |
+        git config user.name "github-actions"
+        git config user.email "actions@github.com"
+        git config core.autocrlf false
+
+    - name: Verificar alterações e atualizar
+      run: |
+        git add --all
+        if git diff --cached --quiet; then
+          echo "Nenhuma alteração detectada no CSV."
+        else
+          echo "Alterações detectadas. Atualizando..."
+          git commit -m "Atualização automática do CSV via Google Drive"
+          git push
+        fi
