@@ -12,7 +12,7 @@
     <img src="https://raw.githubusercontent.com/SGIBIZA/Catalogo-BIZA/main/logo-BIZAxGHT.png" alt="Logo BIZA e GHT" />
     <h1>Catálogo de Ideias BIZA</h1>
 
-    <!-- Botão em caixa branca -->
+    <!-- Botão em destaque para acesso ao formulário de ideias -->
     <div class="botao-container">
       <div class="botao-box">
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdVczEc2ipfK5so9cr0dHmljeqZ0ivjNXAx_MyS9YASxOzXZg/viewform"
@@ -24,26 +24,24 @@
     </div>
   </header>
 
-  <!-- NOVO: Wrapper para centralizar o conteúdo e limitar a largura -->
-  <div class="wrapper">
-    <div class="filtros">
-      <select id="statusFilter">
-        <option value="">— Todos Status —</option>
-        <option value="Concluído">Concluído</option>
-        <option value="Em Aberto">Em Aberto</option>
-      </select>
+  <div class="filtros">
+    <select id="statusFilter">
+      <option value="">— Todos Status —</option>
+      <option value="Concluído">Concluído</option>
+      <option value="Em Aberto">Em Aberto</option>
+    </select>
+    
+    <input type="text" id="pesquisa" placeholder="Pesquisar ideias..." />
 
-      <input type="text" id="pesquisa" placeholder="Pesquisar ideias..." />
-
-      <div class="total-box">
-        <span>Total de Melhorias:</span>
-        <span id="totalMelhorias">0</span>
-      </div>
+    <div class="total-box">
+      <span>Total de Melhorias:</span>
+      <span id="totalMelhorias">0</span>
     </div>
-
-    <div id="cards"></div>
   </div>
+
+  <div id="cards"></div>
 
   <script src="script.js"></script>
 </body>
 </html>
+
