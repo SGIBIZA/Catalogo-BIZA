@@ -10,23 +10,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar repositório
+      - name: Clonar o repositório
         uses: actions/checkout@v3
 
       - name: Baixar CSV do Google Drive
         run: |
-          echo "Iniciando download do CSV..."
           curl -L "https://drive.google.com/uc?export=download&id=17tW1PwgxUpR94Dtg4MHe0K7QqOv7VFHQ" -o FOR.BIZA.SGI.csv
-          echo "Arquivo baixado. Verificando conteúdo..."
-          ls -lh FOR.BIZA.SGI.csv || echo "❌ Arquivo não encontrado"
 
       - name: Configurar Git
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
 
-      - name: Commit & Push se houver alterações
+      - name: Verificar alterações e commitar
         run: |
           git add FOR.BIZA.SGI.csv
-          git diff --cached --quiet || git commit -m "Atualização automática do CSV via Google Drive"
-          git push
+          if git diff --cached --quiet; then
+            echo "✅ Nenhuma alteração detectada no CSV. Nenhum commit necessário."
+          else
+            echo "🔄 Alterações detectadas no CSV. Comitando atualização..."
+            git commit -m "Atualização automática do CSV via Google Drive"
+            git push
+          fi
