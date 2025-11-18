@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  const csvUrl = 'https://raw.githubusercontent.com/SGIBIZA/Catalogo-BIZA/main/FOR.BIZA.SGI.csv';
+ const csvUrl = 'FOR.BIZA.SGI.csv';
+
   let dadosOriginais = [];
 
   // Conversão de data do Excel
