@@ -26,7 +26,6 @@ html, body {
   overflow-x: hidden;
 }
 
-
 /* Botão Dê sua Ideia */
 .botao-container {
   display: flex;
@@ -79,7 +78,6 @@ input[type="text"] {
   box-sizing: border-box;
 }
 
-
 .card {
   background-color: #2c2c2c;
   padding: 1rem;
@@ -100,6 +98,39 @@ input[type="text"] {
 .card p {
   margin: 0.3rem 0;
 }
+
+/* =============================== */
+/*     NOVAS CAIXAS DE STATUS      */
+/* =============================== */
+
+.status {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+}
+
+/* Status Concluído */
+.status.concluido {
+  background-color: #28a745;
+  color: #fff;
+}
+
+/* Status Em Aberto */
+.status.aberto {
+  background-color: #f8ad1e;
+  color: #000;
+}
+
+/* Status Reprovado */
+.status.reprovado {
+  background-color: #e63946;
+  color: #fff;
+}
+
+/* ========================================= */
 
 @media (max-width: 768px) {
   header h1 {
