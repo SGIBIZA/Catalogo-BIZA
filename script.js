@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const filtrados = dadosOriginais.filter(d => {
       const statusOk = !statusSelecionado || d["Status"] === statusSelecionado;
       const textoCard =
-        ${d["Item"]} ${d["Status"]} ${d["Data da Ideia"]} ${d["Descrição da Ideia de Melhoria"]} ${d["Agente da Melhoria"]}
+        `${d["Item"]} ${d["Status"]} ${d["Data da Ideia"]} ${d["Descrição da Ideia de Melhoria"]} ${d["Agente da Melhoria"]}`
           .toLowerCase();
       const pesquisaOk = textoCard.includes(termoBusca);
       return statusOk && pesquisaOk;
