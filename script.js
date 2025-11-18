@@ -24,29 +24,43 @@ document.addEventListener('DOMContentLoaded', () => {
     return "";
   }
 
-  // Criação dos cards
-  function criarCard(obj) {
-    const div = document.createElement('div');
-    div.className = 'card';
+ // Criação dos cards
+ function criarCard(obj) {
+  const div = document.createElement('div');
+  div.className = 'card';
 
-    const statusTexto = obj["Status"] ? obj["Status"].trim() : "";
-    const statusClass = getStatusClass(statusTexto);
+  const statusTexto = obj["Status"] ? obj["Status"].trim() : "";
+  const statusClass = getStatusClass(statusTexto);
 
-    div.innerHTML = `
-      <h3>Ideia #${obj["Item"]}</h3>
+  // Verifica se deve exibir o motivo
+  const motivo = obj["Motivo da reprovação"] ? obj["Motivo da reprovação"].trim() : "";
+  const mostrarMotivo = statusClass === "reprovado" && motivo !== "";
 
-      <p>
-        <span class="status ${statusClass}">
-          ${statusTexto || "Sem status"}
-        </span>
-      </p>
+  div.innerHTML = `
+    <h3>Ideia #${obj["Item"]}</h3>
 
-      <p><strong>Data:</strong> ${excelDateToJSDate(obj["Data da Ideia"])}</p>
-      <p><strong>Descrição:</strong> ${obj["Descrição da Ideia de Melhoria"]}</p>
-      <p><strong>Agente:</strong> ${obj["Agente da Melhoria"]}</p>
-    `;
-    return div;
-  }
+    <p>
+      <span class="status ${statusClass}">
+        ${statusTexto || "Sem status"}
+      </span>
+    </p>
+
+    <p><strong>Data:</strong> ${excelDateToJSDate(obj["Data da Ideia"])}</p>
+    <p class="descricao"><strong>Descrição:</strong> ${obj["Descrição da Ideia de Melhoria"]}</p>
+
+
+    ${mostrarMotivo ? `
+      <div class="motivo-box">
+        <strong>Motivo da reprovação:</strong> ${motivo}
+      </div>
+    ` : ""}
+
+   <p class="agente"><strong>Agente:</strong> ${obj["Agente da Melhoria"]}</p>
+
+  `;
+
+  return div;
+}
 
   // Renderização dos cards
   function renderizar() {
