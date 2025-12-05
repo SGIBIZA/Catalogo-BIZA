@@ -127,3 +127,4 @@ Item;Data da Ideia;Status;Agente da Melhoria;Descrição da Ideia de Melhoria;Mo
 210;45986;Em Aberto;GUILHERME_STACHELSKI;Criar um dashboard interativo e uma tela de consulta (workflow) para rastreabilidade dos EIMEs (status, condição, local de estoque, etc).;
 211;45986;Em Aberto;ELSIO_HENRIQUE;Cartão de peças prioridade semanal para ter agilidade na produção e entregar o produto ao cliente com mais rapidez;
 212;45987;Em Aberto;ANDREY;Usar cinto com catraca para melhorar a fixação e evitar tombamento;
+213;45996;Em Aberto;RAFAEL_FELIPE;Colocar identificações sequências para saber o primeiro Varal a ser retirado as peças Pintadas (FIFO);
