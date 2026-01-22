@@ -92,15 +92,29 @@ const mostrarMotivo = (!aguardandoAprovacao && !ideiaAprovada); // sobra = justi
 
     const statusSelecionado = document.getElementById('statusFilter').value;
     const termoBusca = document.getElementById('pesquisa').value.toLowerCase();
+    const termoImplementador = document.getElementById('filtroImplementador').value.toLowerCase().trim();
+    const termoAgente = document.getElementById('filtroAgente').value.toLowerCase().trim();
 
-    const filtrados = dadosOriginais.filter(d => {
-      const statusOk = !statusSelecionado || d["Status"] === statusSelecionado;
-      const textoCard =
-        `${d["Item"]} ${d["Status"]} ${d["Data da Ideia"]} ${d["Descrição da Ideia de Melhoria"]} ${d["Agente da Melhoria"]}`
-          .toLowerCase();
-      const pesquisaOk = textoCard.includes(termoBusca);
-      return statusOk && pesquisaOk;
-    });
+
+  const filtrados = dadosOriginais.filter(d => {
+  const statusOk = !statusSelecionado || d["Status"] === statusSelecionado;
+
+  const textoCard =
+    `${d["Item"]} ${d["Status"]} ${d["Data da Ideia"]} ${d["Descrição da Ideia de Melhoria"]} ${d["Agente da Melhoria"]} ${d["Motivo da reprovação"] || ""} ${d["Líder da Implementação"] || ""}`
+      .toLowerCase();
+
+  const pesquisaOk = textoCard.includes(termoBusca);
+
+  const implementadorOk =
+    !termoImplementador ||
+    (d["Líder da Implementação"] || "").toLowerCase().includes(termoImplementador);
+
+  const agenteOk =
+    !termoAgente ||
+    (d["Agente da Melhoria"] || "").toLowerCase().includes(termoAgente);
+
+  return statusOk && pesquisaOk && implementadorOk && agenteOk;
+});
 
     filtrados.forEach(d => container.appendChild(criarCard(d)));
     document.getElementById('totalMelhorias').textContent = filtrados.length;
@@ -109,6 +123,8 @@ const mostrarMotivo = (!aguardandoAprovacao && !ideiaAprovada); // sobra = justi
   // Eventos
   document.getElementById('statusFilter').addEventListener('change', renderizar);
   document.getElementById('pesquisa').addEventListener('input', renderizar);
+  document.getElementById('filtroImplementador').addEventListener('input', renderizar);
+  document.getElementById('filtroAgente').addEventListener('input', renderizar);
 
   // Leitura do CSV
   Papa.parse(csvUrl, {

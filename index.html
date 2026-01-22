@@ -24,21 +24,28 @@
     </div>
   </header>
 
-  <div class="filtros">
-    <select id="statusFilter">
-      <option value="">— Todos Status —</option>
-      <option value="Concluído">Concluído</option>
-      <option value="Em Aberto">Em Aberto</option>
-      <option value="Reprovada">Reprovada</option>
-    </select>
-    
-    <input type="text" id="pesquisa" placeholder="Pesquisar ideias..." />
+ <div class="filtros">
+  <select id="statusFilter">
+    <option value="">— Todos Status —</option>
+    <option value="Concluído">Concluído</option>
+    <option value="Em Aberto">Em Aberto</option>
+    <option value="Reprovada">Reprovada</option>
+  </select>
 
-    <div class="total-box">
-      <span>Total de Melhorias:</span>
-      <span id="totalMelhorias">0</span>
-    </div>
+  <!-- NOVO: filtro por implementador -->
+  <input type="text" id="filtroImplementador" placeholder="Filtrar por implementador..." />
+
+  <!-- NOVO: filtro por agente -->
+  <input type="text" id="filtroAgente" placeholder="Filtrar por agente..." />
+
+  <!-- Pesquisa geral (já existia) -->
+  <input type="text" id="pesquisa" placeholder="Pesquisar ideias..." />
+
+  <div class="total-box">
+    <span>Total de Melhorias:</span>
+    <span id="totalMelhorias">0</span>
   </div>
+</div>
 
   <div id="cards"></div>
 
