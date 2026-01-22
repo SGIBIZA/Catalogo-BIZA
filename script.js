@@ -34,12 +34,11 @@ function criarCard(obj) {
   const statusClass = getStatusClass(statusTexto);
 
   const motivo = obj["Motivo da reprovação"] ? obj["Motivo da reprovação"].trim() : "";
+  const implementador = obj["Implementador"] ? obj["Implementador"].trim() : "";
 
-  // Reprovada + motivo preenchido
   const mostrarMotivo = (statusClass === "reprovado" && motivo !== "");
-
-  // Em aberto + motivo vazio = aguardando aprovação do comitê
   const aguardandoAprovacao = (statusClass === "aberto" && motivo === "");
+  const ideiaAprovada = (statusClass === "aprovado" && motivo === "");
 
   div.innerHTML = `
     <h3>Ideia #${obj["Item"]}</h3>
@@ -62,6 +61,13 @@ function criarCard(obj) {
     ${aguardandoAprovacao ? `
       <div class="aprovacao-box">
         <strong>Status da aprovação:</strong> Aguardando aprovação do comitê
+      </div>
+    ` : ""}
+
+    ${ideiaAprovada ? `
+      <div class="aprovado-box">
+        <strong>Status:</strong>
+        Ideia aprovada, para mais detalhes procure o implementador "${implementador || '—'}"
       </div>
     ` : ""}
 

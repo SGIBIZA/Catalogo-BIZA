@@ -219,13 +219,26 @@ input[type="text"] {
 
 /* Aguardando aprovação (quando Motivo da reprovação estiver vazio) */
 .aprovacao-box {
-  background-color: rgba(255,255,255,0.06);  /* cinza suave */
-  border-left: 4px solid #8a8a8a;            /* cinza */
+  background-color: rgba(255, 255, 255, 0.06);  /* cinza suave */
+  border-left: 4px solid #7B2CBF;            /* cinza */
   padding: 10px;
   margin-top: 10px;
   border-radius: 6px;
 }
 
 .aprovacao-box strong {
-  color: #cfcfcf; /* destaque do título */
+  color: #c6c4c4; /* destaque do título */
+}
+
+/* Ideia aprovada */
+.aprovado-box {
+  background-color: rgba(248, 173, 30, 0.15); /* amarelo suave */
+  border-left: 4px solid #f8ad1e;            /* amarelo BIZA */
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+.aprovado-box strong {
+  color: #f8ad1e;
 }
