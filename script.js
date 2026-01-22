@@ -34,7 +34,7 @@ function criarCard(obj) {
   const statusClass = getStatusClass(statusTexto);
 
   const motivo = obj["Motivo da reprovação"] ? obj["Motivo da reprovação"].trim() : "";
-  const implementador = obj["Implementador"] ? obj["Implementador"].trim() : "";
+  const implementador = obj["Líder da Implementação"] ? obj["Líder da Implementação"].trim() : "";
 
   const mostrarMotivo = (statusClass === "reprovado" && motivo !== "");
   const aguardandoAprovacao = (statusClass === "aberto" && motivo === "");
