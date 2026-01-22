@@ -36,9 +36,17 @@ function criarCard(obj) {
   const motivo = obj["Motivo da reprovação"] ? obj["Motivo da reprovação"].trim() : "";
   const implementador = obj["Líder da Implementação"] ? obj["Líder da Implementação"].trim() : "";
 
-  const mostrarMotivo = (statusClass === "reprovado" && motivo !== "");
-  const aguardandoAprovacao = (statusClass === "aberto" && motivo === "");
-  const ideiaAprovada = (statusClass === "aprovado" && motivo === "");
+ // A coluna "Motivo da reprovação" agora tem 3 usos:
+// - vazia  => aguardando aprovação do comitê
+// - "Aprovada" (ou variações) => aprovada
+// - texto longo (justificativa) => reprovada
+
+const motivoLower = motivo.toLowerCase();
+
+const aguardandoAprovacao = (motivo === "");
+const ideiaAprovada = (motivoLower.includes("aprov")); // aprovada/aprovado/aprovação
+const mostrarMotivo = (!aguardandoAprovacao && !ideiaAprovada); // sobra = justificativa
+
 
   div.innerHTML = `
     <h3>Ideia #${obj["Item"]}</h3>
