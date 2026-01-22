@@ -199,8 +199,6 @@ input[type="text"] {
     justify-content: center;
     margin-top: 10px;
   }
-
-
 }
 
 /* Desktop: coloca ao lado dos filtros */
@@ -217,6 +215,17 @@ input[type="text"] {
     margin-top: 0;
     margin-left: auto;
   }
+}
 
-  
+/* Aguardando aprovação (quando Motivo da reprovação estiver vazio) */
+.aprovacao-box {
+  background-color: rgba(255,255,255,0.06);  /* cinza suave */
+  border-left: 4px solid #8a8a8a;            /* cinza */
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+.aprovacao-box strong {
+  color: #cfcfcf; /* destaque do título */
 }

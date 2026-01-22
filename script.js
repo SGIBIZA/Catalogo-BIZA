@@ -25,17 +25,21 @@ document.addEventListener('DOMContentLoaded', () => {
     return "";
   }
 
- // Criação dos cards
- function criarCard(obj) {
+// Criação dos cards
+function criarCard(obj) {
   const div = document.createElement('div');
   div.className = 'card';
 
   const statusTexto = obj["Status"] ? obj["Status"].trim() : "";
   const statusClass = getStatusClass(statusTexto);
 
-  // Verifica se deve exibir o motivo
   const motivo = obj["Motivo da reprovação"] ? obj["Motivo da reprovação"].trim() : "";
-  const mostrarMotivo = statusClass === "reprovado" && motivo !== "";
+
+  // Reprovada + motivo preenchido
+  const mostrarMotivo = (statusClass === "reprovado" && motivo !== "");
+
+  // Em aberto + motivo vazio = aguardando aprovação do comitê
+  const aguardandoAprovacao = (statusClass === "aberto" && motivo === "");
 
   div.innerHTML = `
     <h3>Ideia #${obj["Item"]}</h3>
@@ -49,15 +53,19 @@ document.addEventListener('DOMContentLoaded', () => {
     <p><strong>Data:</strong> ${excelDateToJSDate(obj["Data da Ideia"])}</p>
     <p class="descricao"><strong>Descrição:</strong> ${obj["Descrição da Ideia de Melhoria"]}</p>
 
-
     ${mostrarMotivo ? `
       <div class="motivo-box">
         <strong>Motivo da reprovação:</strong> ${motivo}
       </div>
     ` : ""}
 
-   <p class="agente"><strong>Agente:</strong> ${obj["Agente da Melhoria"]}</p>
+    ${aguardandoAprovacao ? `
+      <div class="aprovacao-box">
+        <strong>Status da aprovação:</strong> Aguardando aprovação do comitê
+      </div>
+    ` : ""}
 
+    <p class="agente"><strong>Agente:</strong> ${obj["Agente da Melhoria"]}</p>
   `;
 
   return div;
