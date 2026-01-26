@@ -39,7 +39,7 @@ Item;Data da Ideia;Status;Agente da Melhoria;Descrição da Ideia de Melhoria;Mo
 122;45810.2736111111;Em Aberto;HENRIQUE_DE_SIQUEIRA;Fazer esse envio de programação por rede ou cabo óptico ;Aprovada;
 123;45810.2789699074;Em Aberto;HENRIQUE_DE_SIQUEIRA;Criar uma lista de favoritos para cada usuário ou máquina ;Aprovada;
 124;45810.325787037;Reprovada;HENRIQUE_DE_SIQUEIRA;Adequar armazenamento de telas de aço e paletes, e também realocar para área mais próxima do seu uso;Reprovado como ideia de melhoria, porém será tratado dentro do processo de 5S das áreas que está sendo realizado pela área de Melhoria Contínua;1-N/A
-125;45810.325787037;Em Aberto;HENRIQUE_CARVALHO;Instalar uma lâmpada com sensor de presença.;Aprovada;
+125;45810.325787037;Reprovada;HENRIQUE_CARVALHO;Instalar uma lâmpada com sensor de presença.;Processo de solicitação de iluminação com sensor de presença já padronizado via manutenção, sendo necessário apenas abrir solicitação de serviço através do sistema SIGMA. Obs: Serviço já realizado e iluminação instalada.;
 126;45811;Concluído;HENRIQUE_CARVALHO;Implementar atualizações contínuas na tela de ideias BIZA, permitindo que todos os usuários acompanhem em tempo real o progresso de cada etapa no desenvolvimento das ideias.;Aprovada;DIOGO
 127;45812;Em Aberto;DENERSON;Um espaço dedicado a leitura e onde o colaborador poderá emprestar livros e ou manuais para enriquecimento intelectual.  O ESPAÇO seria voltado a divulgação de capacitações e treinamentos de assuntos  diversos ao crescimento pessoal e assustos diversos.;Aprovada;FRANCIELE
 128;45813;Concluído;ALEXANDER;Desenvolver novo produto ou processo de pintura que garanta a eficácia na aderência da tinta em escadas, considerando também um tempo de secagem menor.;Aprovada;ALEXANDER
