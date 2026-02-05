@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
- const csvUrl = 'FOR.BIZA.SGI.csv';
+  const csvUrl = 'FOR.BIZA.SGI.csv';
 
   let dadosOriginais = [];
 
@@ -25,65 +25,71 @@ document.addEventListener('DOMContentLoaded', () => {
     return "";
   }
 
-// Criação dos cards
-function criarCard(obj) {
-  const div = document.createElement('div');
-  div.className = 'card';
+  // Criação dos cards
+  function criarCard(obj) {
+    const div = document.createElement('div');
+    div.className = 'card';
 
-  const statusTexto = obj["Status"] ? obj["Status"].trim() : "";
-  const statusClass = getStatusClass(statusTexto);
+    const statusTexto = obj["Status"] ? obj["Status"].trim() : "";
+    const statusClass = getStatusClass(statusTexto);
 
-  const motivo = obj["Motivo da reprovação"] ? obj["Motivo da reprovação"].trim() : "";
-  const implementador = obj["Líder da Implementação"] ? obj["Líder da Implementação"].trim() : "";
+    const motivo = obj["Motivo da reprovação"] ? obj["Motivo da reprovação"].trim() : "";
+    const implementador = obj["Líder da Implementação"] ? obj["Líder da Implementação"].trim() : "";
 
- // A coluna "Motivo da reprovação" agora tem 3 usos:
-// - vazia  => aguardando aprovação do comitê
-// - "Aprovada" (ou variações) => aprovada
-// - texto longo (justificativa) => reprovada
+    // A coluna "Motivo da reprovação" agora tem 3 usos:
+    // - vazia  => aguardando aprovação do comitê (Mantém)
+    // - "Aprovada" (ou variações) => aprovada (Corrigir)
+    // - texto longo (justificativa) => reprovada (Mantém)
 
-const motivoLower = motivo.toLowerCase();
+    const motivoLower = motivo.toLowerCase();
 
-const aguardandoAprovacao = (motivo === "");
-const ideiaAprovada = (motivoLower.includes("aprov")); // aprovada/aprovado/aprovação
-const mostrarMotivo = (!aguardandoAprovacao && !ideiaAprovada); // sobra = justificativa
+    // Normaliza para comparar corretamente (remove acentos e pontuação)
+    const motivoNormalizado = motivoLower
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim()
+      .replace(/^[\s.,;:!?()\[\]"'-]+|[\s.,;:!?()\[\]"'-]+$/g, '');
 
+    const aguardandoAprovacao = (motivo === "");
+    const ideiaAprovada = (/^(aprovad[ao]s?)$/).test(motivoNormalizado);
+    const mostrarMotivo = (!aguardandoAprovacao && !ideiaAprovada);
 
-  div.innerHTML = `
-    <h3>Ideia #${obj["Item"]}</h3>
+    div.innerHTML = `
+      <h3>Ideia #${obj["Item"]}</h3>
 
-    <p>
-      <span class="status ${statusClass}">
-        ${statusTexto || "Sem status"}
-      </span>
-    </p>
+      <p>
+        <span class="status ${statusClass}">
+          ${statusTexto || "Sem status"}
+        </span>
+      </p>
 
-    <p><strong>Data:</strong> ${excelDateToJSDate(obj["Data da Ideia"])}</p>
-    <p class="descricao"><strong>Descrição:</strong> ${obj["Descrição da Ideia de Melhoria"]}</p>
+      <p><strong>Data:</strong> ${excelDateToJSDate(obj["Data da Ideia"])}</p>
+      <p class="descricao"><strong>Descrição:</strong> ${obj["Descrição da Ideia de Melhoria"]}</p>
 
-    ${mostrarMotivo ? `
-      <div class="motivo-box">
-        <strong>Motivo da reprovação:</strong> ${motivo}
-      </div>
-    ` : ""}
+      ${mostrarMotivo ? `
+        <div class="motivo-box">
+          <strong>Motivo da reprovação:</strong> ${motivo}
+        </div>
+      ` : ""}
 
-    ${aguardandoAprovacao ? `
-      <div class="aprovacao-box">
-        <strong>Status da aprovação:</strong> Aguardando aprovação do comitê
-      </div>
-    ` : ""}
+      ${aguardandoAprovacao ? `
+        <div class="aprovacao-box">
+          <strong>Status da aprovação:</strong> Aguardando aprovação do comitê
+        </div>
+      ` : ""}
 
-    ${ideiaAprovada ? `
-      <div class="aprovado-box">
-        <strong>Status:</strong>
-        Ideia aprovada, para mais detalhes procure o implementador "${implementador || '—'}"
-      </div>
-    ` : ""}
+      ${ideiaAprovada ? `
+        <div class="aprovado-box">
+          <strong>Status:</strong>
+          Ideia aprovada, para mais detalhes procure o implementador "${implementador || '—'}"
+        </div>
+      ` : ""}
 
-    <p class="agente"><strong>Agente:</strong> ${obj["Agente da Melhoria"]}</p>
-  `;
+      <p class="agente"><strong>Agente:</strong> ${obj["Agente da Melhoria"]}</p>
+    `;
 
-  return div;
-}
+    return div;
+  }
 
   // Renderização dos cards
   function renderizar() {
@@ -95,26 +101,25 @@ const mostrarMotivo = (!aguardandoAprovacao && !ideiaAprovada); // sobra = justi
     const termoImplementador = document.getElementById('filtroImplementador').value.toLowerCase().trim();
     const termoAgente = document.getElementById('filtroAgente').value.toLowerCase().trim();
 
+    const filtrados = dadosOriginais.filter(d => {
+      const statusOk = !statusSelecionado || d["Status"] === statusSelecionado;
 
-  const filtrados = dadosOriginais.filter(d => {
-  const statusOk = !statusSelecionado || d["Status"] === statusSelecionado;
+      const textoCard =
+        `${d["Item"]} ${d["Status"]} ${d["Data da Ideia"]} ${d["Descrição da Ideia de Melhoria"]} ${d["Agente da Melhoria"]} ${d["Motivo da reprovação"] || ""} ${d["Líder da Implementação"] || ""}`
+          .toLowerCase();
 
-  const textoCard =
-    `${d["Item"]} ${d["Status"]} ${d["Data da Ideia"]} ${d["Descrição da Ideia de Melhoria"]} ${d["Agente da Melhoria"]} ${d["Motivo da reprovação"] || ""} ${d["Líder da Implementação"] || ""}`
-      .toLowerCase();
+      const pesquisaOk = textoCard.includes(termoBusca);
 
-  const pesquisaOk = textoCard.includes(termoBusca);
+      const implementadorOk =
+        !termoImplementador ||
+        (d["Líder da Implementação"] || "").toLowerCase().includes(termoImplementador);
 
-  const implementadorOk =
-    !termoImplementador ||
-    (d["Líder da Implementação"] || "").toLowerCase().includes(termoImplementador);
+      const agenteOk =
+        !termoAgente ||
+        (d["Agente da Melhoria"] || "").toLowerCase().includes(termoAgente);
 
-  const agenteOk =
-    !termoAgente ||
-    (d["Agente da Melhoria"] || "").toLowerCase().includes(termoAgente);
-
-  return statusOk && pesquisaOk && implementadorOk && agenteOk;
-});
+      return statusOk && pesquisaOk && implementadorOk && agenteOk;
+    });
 
     filtrados.forEach(d => container.appendChild(criarCard(d)));
     document.getElementById('totalMelhorias').textContent = filtrados.length;
