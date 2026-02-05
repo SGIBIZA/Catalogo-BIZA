@@ -4,6 +4,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let dadosOriginais = [];
 
+  // Mede a altura do header e dos filtros para ajustar offsets dos elementos fixos
+  function atualizarAlturasFixas() {
+    const header = document.querySelector('header');
+    const filtros = document.querySelector('.filtros');
+    if (!header || !filtros) return;
+
+    const headerH = header.offsetHeight || 0;
+    const filtrosH = filtros.offsetHeight || 0;
+
+    document.documentElement.style.setProperty('--header-h', `${headerH}px`);
+    document.documentElement.style.setProperty('--filtros-h', `${filtrosH}px`);
+  }
+
+  atualizarAlturasFixas();
+  window.addEventListener('resize', atualizarAlturasFixas);
+  window.addEventListener('load', atualizarAlturasFixas);
+  setTimeout(atualizarAlturasFixas, 50);
+
   // Conversão de data do Excel
   function excelDateToJSDate(serial) {
     const utc_days = Math.floor(serial - 25569);
@@ -142,3 +160,4 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 }); // <-- FINALIZA O DOMContentLoaded CORRETAMENTE
+
