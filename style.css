@@ -1,3 +1,8 @@
+/* ========================= */
+/*   ESTILOS GERAIS DA PÁGINA */
+/* ========================= */
+
+/* Corpo da página: fonte, cores e fundo geral */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -5,38 +10,60 @@ body {
   color: #fff;
 }
 
+/* Evita rolagem horizontal indesejada */
+html, body {
+  overflow-x: hidden;
+}
+
+/* ========================= */
+/*          CABEÇALHO        */
+/* ========================= */
+
+/* Cabeçalho fixo no topo com sombra */
 header {
   background-color: #000;
   color: #f8ad1e;
   text-align: center;
   padding: 1rem;
+
+  /* trava o cabeçalho no topo ao rolar a página */
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+
+  /* sombra abaixo do cabeçalho */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 
+/* Logo dentro do cabeçalho */
 header img {
   height: 60px;
   margin-bottom: 0.5rem;
 }
 
+/* Título principal do cabeçalho */
 header h1 {
   font-size: 1.8rem;
   margin: 0;
 }
 
-html, body {
-  overflow-x: hidden;
-}
+/* ========================= */
+/*     BOTÃO "DÊ SUA IDEIA"  */
+/* ========================= */
 
-/* Botão Dê sua Ideia */
+/* Container para centralizar o botão */
 .botao-container {
   display: flex;
   justify-content: center;
   margin-top: 10px;
 }
 
+/* Caixa do botão (pode receber estilos adicionais no futuro) */
 .botao-box {
   background: none;
 }
 
+/* Estilo do link/botão */
 .botao-ideia {
   background-color: white;
   color: black;
@@ -48,11 +75,17 @@ html, body {
   transition: 0.3s;
 }
 
+/* Hover do botão */
 .botao-ideia:hover {
   background-color: #f8ad1e;
   color: white;
 }
 
+/* ========================= */
+/*           FILTROS         */
+/* ========================= */
+
+/* Faixa dos filtros acima dos cards */
 .filtros {
   display: flex;
   flex-wrap: wrap;
@@ -62,6 +95,7 @@ html, body {
   background-color: #111;
 }
 
+/* Campos de seleção e texto nos filtros */
 select,
 input[type="text"] {
   padding: 0.5rem;
@@ -70,6 +104,11 @@ input[type="text"] {
   min-width: 200px;
 }
 
+/* ========================= */
+/*     GRID DE CARDS         */
+/* ========================= */
+
+/* Container dos cards de ideias em grid responsivo */
 #cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -77,19 +116,24 @@ input[type="text"] {
   padding: 1rem;
   box-sizing: border-box;
 }
+
+/* Destaque dos títulos (strong) dentro dos parágrafos do card */
 .card p strong {
   display: inline-block;
   margin-bottom: 4px;
 }
 
+/* Espaço acima da descrição do card */
 .card p.descricao {
-  margin-top: 20px; /* espaço antes */
+  margin-top: 20px;
 }
+
+/* Espaço acima da linha do agente */
 .card p.agente {
-  margin-top: 20px;  /* distancia antes do agente */
+  margin-top: 20px;
 }
 
-
+/* Estilo base dos cards */
 .card {
   background-color: #2c2c2c;
   padding: 1rem;
@@ -98,23 +142,27 @@ input[type="text"] {
   transition: transform 0.2s;
 }
 
+/* Efeito de zoom leve ao passar o mouse no card */
 .card:hover {
   transform: scale(1.02);
 }
 
+/* Título do card (Ideia #X) */
 .card h3 {
   color: #f8ad1e;
   margin-top: 0;
 }
 
+/* Parágrafos gerais dentro do card */
 .card p {
   margin: 0.3rem 0;
 }
 
 /* =============================== */
-/*     NOVAS CAIXAS DE STATUS      */
+/*        ETIQUETAS DE STATUS      */
 /* =============================== */
 
+/* Base da etiqueta de status */
 .status {
   display: inline-block;
   padding: 5px 12px;
@@ -142,48 +190,94 @@ input[type="text"] {
   color: #fff;
 }
 
-/* Motivo da reprovação */
+/* =============================== */
+/*   CAIXA "MOTIVO DA REPROVAÇÃO"  */
+/* =============================== */
+
+/* Bloco de texto explicando o motivo da reprovação */
 .motivo-box {
-  background-color: #ffcccc20;  /* vermelho bem suave com transparência */
-  border-left: 4px solid #e63946; /* vermelho da etiqueta reprovado */
+  background-color: #ffcccc20;     /* vermelho bem suave com transparência */
+  border-left: 4px solid #e63946;  /* vermelho da etiqueta reprovado */
   padding: 10px;
   margin-top: 10px;
   border-radius: 6px;
 }
 
+/* Título dentro do motivo da reprovação */
 .motivo-box strong {
   color: #ff6b6b; /* destaque mais vivo para o título */
 }
 
-/* ========================================= */
+/* =============================== */
+/*      CAIXAS DE APROVAÇÃO        */
+/* =============================== */
+
+/* Aguardando aprovação (quando Motivo da reprovação estiver vazio) */
+.aprovacao-box {
+  background-color: rgba(255, 255, 255, 0.06);  /* cinza suave */
+  border-left: 4px solid #7B2CBF;               /* destaque lateral */
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+/* Título da caixa "Aguardando aprovação" */
+.aprovacao-box strong {
+  color: #c6c4c4; /* destaque do título */
+}
+
+/* Ideia aprovada (quando célula tiver "Aprovada") */
+.aprovado-box {
+  background-color: rgba(248, 173, 30, 0.15); /* amarelo suave */
+  border-left: 4px solid #f8ad1e;            /* amarelo BIZA */
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+/* Título da caixa "Ideia aprovada" */
+.aprovado-box strong {
+  color: #f8ad1e;
+}
+
+/* =============================== */
+/*       RESPONSIVIDADE MOBILE     */
+/* =============================== */
 
 @media (max-width: 768px) {
+  /* Ajusta o tamanho do título no mobile */
   header h1 {
     font-size: 1.6rem;
   }
 
+  /* Filtros em coluna no mobile */
   .filtros {
     flex-direction: column;
     align-items: center;
   }
 
+  /* Inputs ocupam quase toda a largura no mobile */
   select,
   input[type="text"] {
     width: 90%;
   }
 
+  /* Ajustes de espaço interno dos cards no mobile */
   .card {
     padding: 1rem;
   }
 
+  /* Título menor dentro dos cards no mobile */
   .card h3 {
     font-size: 1.1rem;
   }
 
+  /* Texto um pouco menor dentro dos cards */
   .card p {
     font-size: 0.95rem;
   }
 
+  /* Caixa que mostra o total de melhorias (versão mobile) */
   .total-box {
     background-color: #1f1f1f;
     color: orange;
@@ -201,8 +295,12 @@ input[type="text"] {
   }
 }
 
-/* Desktop: coloca ao lado dos filtros */
+/* =============================== */
+/*     LAYOUT RESPONSIVO DESKTOP   */
+/* =============================== */
+
 @media (min-width: 768px) {
+  /* Filtros em linha, com alinhamento e espaçamento no desktop */
   .filtros {
     display: flex;
     align-items: center;
@@ -211,34 +309,9 @@ input[type="text"] {
     justify-content: flex-start;
   }
 
+  /* Total de melhorias alinhado à direita dos filtros no desktop */
   .total-box {
     margin-top: 0;
     margin-left: auto;
   }
-}
-
-/* Aguardando aprovação (quando Motivo da reprovação estiver vazio) */
-.aprovacao-box {
-  background-color: rgba(255, 255, 255, 0.06);  /* cinza suave */
-  border-left: 4px solid #7B2CBF;            /* cinza */
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 6px;
-}
-
-.aprovacao-box strong {
-  color: #c6c4c4; /* destaque do título */
-}
-
-/* Ideia aprovada */
-.aprovado-box {
-  background-color: rgba(248, 173, 30, 0.15); /* amarelo suave */
-  border-left: 4px solid #f8ad1e;            /* amarelo BIZA */
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 6px;
-}
-
-.aprovado-box strong {
-  color: #f8ad1e;
 }
