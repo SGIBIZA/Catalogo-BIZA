@@ -8,6 +8,7 @@ body {
   font-family: Arial, sans-serif;
   background-color: #1a1a1a;
   color: #fff;
+  padding-top: 180px; /* compensa o header fixo */
 }
 
 /* Evita rolagem horizontal indesejada */
@@ -26,9 +27,11 @@ header {
   text-align: center;
   padding: 1rem;
 
-  /* trava o cabeçalho no topo ao rolar a página */
-  position: sticky;
+  /* fixa o cabeçalho no topo da janela */
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 9999;
 
   /* sombra abaixo do cabeçalho */
@@ -245,6 +248,11 @@ input[type="text"] {
 /* =============================== */
 
 @media (max-width: 768px) {
+  /* Ajusta o padding do body no mobile */
+  body {
+    padding-top: 200px; /* pode precisar ajustar conforme o tamanho do header */
+  }
+
   /* Ajusta o tamanho do título no mobile */
   header h1 {
     font-size: 1.6rem;
